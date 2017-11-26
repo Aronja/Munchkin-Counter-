@@ -9,18 +9,27 @@ import {
   TextInput
 } from "react-native";
 import { styles } from "./App.js";
+import Game from "./Game.js";
 
 export default class Register extends React.Component {
   state = {
-    name: ""
+    name: "",
+    game: true
   };
 
   changeName = name => {
     this.setState({ name: name });
   };
+  startGame = () => {
+    this.setState({ game: false });
+  };
+
+  onClickgoBack = () => {
+    this.setState({ game: true });
+  };
 
   render() {
-    return (
+    return this.state.game ? (
       <View style={styles.container}>
         <TextInput
           style={{
@@ -36,8 +45,10 @@ export default class Register extends React.Component {
         />
         {this.props.players.map((player, index) => (
           <View key={index}>
-            <Text style={styles.text}>{player.name}</Text>
-            <Text style={styles.text}>{player.score}</Text>
+            <Text style={styles.text}>
+              player {index + 1}: {player.name}
+            </Text>
+            <Text style={styles.text}>score: {player.score}</Text>
           </View>
         ))}
         <Button
@@ -51,6 +62,12 @@ export default class Register extends React.Component {
         <Text style={styles.text}>
           You will at least need two friends to play with you.
         </Text>
+        <Button
+          onPress={this.startGame}
+          title="start Playing"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
         <Text
           style={styles.link}
           onPress={() =>
@@ -70,6 +87,8 @@ export default class Register extends React.Component {
           accessibilityLabel="Learn more about this purple button"
         />
       </View>
+    ) : (
+      <Game goBack={this.onClickgoBack} />
     );
   }
 }
