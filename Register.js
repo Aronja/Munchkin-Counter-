@@ -10,10 +10,15 @@ import {
 } from "react-native";
 import { styles } from "./App.js";
 
-export default class App extends React.Component {
-  onPressRegister = () => {
-    alert("working!");
+export default class Register extends React.Component {
+  state = {
+    name: ""
   };
+
+  changeName = name => {
+    this.setState({ name: name });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -26,11 +31,19 @@ export default class App extends React.Component {
             color: "white"
           }}
           placeholder="write your name here"
-          onChangeText={this.props.changeName}
-          value={this.props.name}
+          onChangeText={this.changeName}
+          value={this.state.name}
         />
+        {this.props.players.map((player, index) => (
+          <View key={index}>
+            <Text style={styles.text}>{player.name}</Text>
+            <Text style={styles.text}>{player.score}</Text>
+          </View>
+        ))}
         <Button
-          onPress={this.onPressRegister}
+          onPress={() => {
+            this.props.addPlayer(this.state.name);
+          }}
           title="Register"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"

@@ -3,15 +3,21 @@ import { StyleSheet, Text, View, Image, Button } from "react-native";
 import Register from "./Register.js";
 
 export default class App extends React.Component {
-  state = { register: true, name: "write your name" };
+  state = {
+    register: true,
+    players: [],
+    game: false
+  };
+
   onPressLearnMore = () => {
     this.setState({ register: false });
   };
   onClickgoBack = () => {
     this.setState({ register: true });
   };
-  changeName = name => {
-    this.setState({ name: name });
+  addPlayer = playerName => {
+    let newPlayers = this.state.players.concat({ name: playerName, score: 1 });
+    this.setState({ players: newPlayers });
   };
 
   render() {
@@ -34,8 +40,8 @@ export default class App extends React.Component {
     ) : (
       <Register
         goBack={this.onClickgoBack}
-        changeName={this.changeName}
-        name={this.state.name}
+        addPlayer={this.addPlayer}
+        players={this.state.players}
       />
     );
   }
