@@ -24,6 +24,7 @@ export default class App extends React.Component {
     return this.state.register ? (
       <View style={styles.container}>
         <Text style={styles.header}>Welcome!</Text>
+	<Text style={styles.header}>Something</Text>
         <Text style={styles.text}>Munchkin Counter</Text>
         <Image
           style={{ maxHeight: 285, maxWidth: 200 }}
