@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "expo": "^36.0.2",
     "react": "^16.12.0",
     "react-native": "^0.61.5"
